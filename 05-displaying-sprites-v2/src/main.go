@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/goweezeflo/ebitengine-practice/04-displaying-sprites/assets/sprites"
+	"github.com/goweezeflo/ebitengine-practice/05-displaying-sprites-v2/pkg/player"
+	"github.com/goweezeflo/ebitengine-practice/05-displaying-sprites-v2/pkg/sprites"
 	sprite "image"
 	"log"
 
@@ -29,7 +30,7 @@ type Game struct {
 
 func main() {
 	ebiten.SetWindowSize(screenWidth, screenHeight)
-	ebiten.SetWindowTitle("Ebitengine - 04 - Displaying Sprites")
+	ebiten.SetWindowTitle("Ebitengine - 05 - Displaying Sprites v2")
 	if err := ebiten.RunGame(&Game{}); err != nil {
 		log.Fatal(err)
 	}
@@ -46,27 +47,23 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 
 func (g *Game) Update() error {
 	options = &ebiten.DrawImageOptions{}
-	if g.tick > 500 {
-		options.GeoM.Rotate(float64(g.tick / 100))
-		options.GeoM.Translate(300, 300)
-	} else if g.tick > 250 {
-		options.GeoM.Translate(200, 100)
-	} else if g.tick > 100 {
-		options.GeoM.Translate(100, 200)
+	if player.PosX < 0 || player.PosX > (screenWidth-imageSize) {
+		player.VectorX *= -1
 	}
+	if player.PosY < 0 || player.PosY > (screenHeight-imageSize) {
+		player.VectorY *= -1
+	}
+	player.PosX += player.VectorX
+	player.PosY += player.VectorY
+	options.GeoM.Translate(player.PosX, player.PosY)
 	g.tick++
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	if g.tick > 500 {
-		rect := sprite.Rect(0, 0, imageSize, imageSize)
-		subImg = sprites.StaticSprite.SubImage(rect)
-	} else {
-		frameNum = int(g.tick/animationSpeed) % numOfFrames
-		frameX = frameNum * imageSize
-		rect := sprite.Rect(frameX, 0, frameX+imageSize, imageSize)
-		subImg = sprites.AnimatedSprite.SubImage(rect)
-	}
+	frameNum = int(g.tick/animationSpeed) % numOfFrames
+	frameX = frameNum * imageSize
+	rect := sprite.Rect(frameX, 0, frameX+imageSize, imageSize)
+	subImg = sprites.AnimatedSprite.SubImage(rect)
 	screen.DrawImage(subImg.(*ebiten.Image), options)
 }

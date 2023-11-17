@@ -1,4 +1,4 @@
-module github.com/goweezeflo
+module github.com/goweezeflo/ebitengine-practice
 
 go 1.21
 

@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/goweezeflo/02-basic-movement/pkg/controller"
-	"github.com/goweezeflo/02-basic-movement/pkg/player"
+	"github.com/goweezeflo/ebitengine-practice/02-basic-movement/pkg/controller"
+	"github.com/goweezeflo/ebitengine-practice/02-basic-movement/pkg/player"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 

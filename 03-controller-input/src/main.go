@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/goweezeflo/03-controller-input/pkg/player"
+	"github.com/goweezeflo/ebitengine-practice/03-controller-input/pkg/player"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 

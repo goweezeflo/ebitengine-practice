@@ -3,13 +3,13 @@ package player
 import (
 	"bytes"
 	"fmt"
-	sfx "github.com/goweezeflo/03-controller-input/assets/audio"
+	sfx "github.com/goweezeflo/ebitengine-practice/03-controller-input/assets/audio"
 	"github.com/hajimehoshi/ebiten/v2/audio"
 	"github.com/hajimehoshi/ebiten/v2/audio/vorbis"
 	"image/color"
 	"log"
 
-	"github.com/goweezeflo/02-basic-movement/pkg/controller"
+	"github.com/goweezeflo/ebitengine-practice/02-basic-movement/pkg/controller"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
