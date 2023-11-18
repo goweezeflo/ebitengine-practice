@@ -5,6 +5,7 @@ import (
 	"github.com/goweezeflo/ebitengine-practice/10-sin-cos-v2/assets/sprites"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"golang.org/x/image/colornames"
 	"image"
 	"image/color"
 	"log"
@@ -55,12 +56,13 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
+	screen.Fill(colornames.Darkslategray)
 	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Tick: %d", g.tick), 10, 10)
 	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Tick (seconds): %d", g.seconds), 10, 30)
 	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Sin: %d", g.sin), 10, 50)
 	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Cos: %d", g.cos), 10, 70)
 	sprite := ebiten.NewImage(32, 32)
-	sprite.Fill(color.RGBA{B: 0xff, A: 0xff})
+	sprite.Fill(color.RGBA{G: 0xff, A: 0xff})
 	screen.DrawImage(sprite, &options)
 	rect := image.Rect(frameX, 0, frameX+imageSize, 64)
 	subImg = sprites.AnimatedSprite.SubImage(rect)

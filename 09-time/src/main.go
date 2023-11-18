@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"golang.org/x/image/colornames"
+	"image"
 	"log"
 	"math"
 	"time"
@@ -49,6 +51,8 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
+	green := image.NewUniform(colornames.Seagreen) // Fill the screen with green color
+	screen.Fill(green)
 	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Epoch: %d", time.Now().Unix()), 10, 10)
 	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Tick (seconds): %d", g.tickInSeconds), 10, 30)
 	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Tick (milliseconds): %d", g.tickInMilliseconds), 10, 50)

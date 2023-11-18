@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"golang.org/x/exp/shiny/materialdesign/colornames"
+	"image"
 	"log"
 	"math"
 	"time"
@@ -24,6 +26,7 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
+	screen.Fill(image.NewUniform(colornames.BlueGrey500)) // Fill the screen with blue/grey color
 	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Tick: %d", g.tick), 10, 10)
 	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Sin: %.2f", g.sin), 10, 30)
 	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Breathing: %d", int(g.sin*10)), 10, int(50+(g.sin*100)))
