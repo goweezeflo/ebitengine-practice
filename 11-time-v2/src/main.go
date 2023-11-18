@@ -5,10 +5,13 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"log"
+	"math"
+	"time"
 )
 
 type Game struct {
 	tick uint64
+	sin  float64
 }
 
 func init() {
@@ -16,11 +19,14 @@ func init() {
 
 func (g *Game) Update() error {
 	g.tick++
+	g.sin = (math.Sin(float64(time.Now().UnixMilli())/1000) + 1) / 2
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Tick: %d", g.tick), 10, 10)
+	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Sin: %.2f", g.sin), 10, 30)
+	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Breathing: %d", int(g.sin*10)), 10, int(50+(g.sin*100)))
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
