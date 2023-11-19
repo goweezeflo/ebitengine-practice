@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"github.com/goweezeflo/ebitengine-practice/07-hud/pkg/hud"
 	"github.com/goweezeflo/ebitengine-practice/07-hud/pkg/input"
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"log"
 )
 
@@ -30,6 +32,8 @@ func (g *Game) Update() error {
 func (g *Game) Draw(screen *ebiten.Image) {
 	gameHUD.DisplayGameTick(screen, g.tick)
 	gameHUD.DisplayPressedKeys(screen, playerInput)
+	gameHUD.DisplayPressedKeys(screen, playerInput)
+	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("FPS: %.2f", ebiten.ActualFPS()), 10, 50)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
